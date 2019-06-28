@@ -66,11 +66,12 @@ class Main extends Component {
               <span className="sr-only">Loading...</span>
             </Spinner>
           </div>) : (<div className="text-center">
-            <Skycons
+            {icon && (<Skycons
               color="black"
               icon={icon.toUpperCase().replace(/-/g, '_')}
               autoplay={true}
-            /><span>{Math.floor(temperature) + 'ºC ' + summary}</span></div>)}</Modal.Body>
+            />)}
+            <span>{Math.floor(temperature) + 'ºC ' + summary}</span></div>)}</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleCloseModal}>
               Cerrar
