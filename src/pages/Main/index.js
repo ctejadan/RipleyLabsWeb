@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import Map from '../../components/Map'
+import MapContainer from '../../components/MapContainer'
 import ClientBFF from '../../common/ClientBFF'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Skycons from 'react-skycons'
+import { connect } from 'react-redux'
 
 class Main extends Component {
   constructor(props) {
@@ -17,6 +18,14 @@ class Main extends Component {
       showLoading: false
     }
     this.ClientBFF = new ClientBFF()
+  }
+
+  componentWillReceiveProps = async (nextProps) => {
+    const { coordinates } = nextProps
+    if (this.props.coordinates !== coordinates) {
+      console.log(coordinates)
+      await this.handleMapClick(coordinates.lat, coordinates.lng)
+    }
   }
 
   handleMapClick = async (lat, lng) => {
@@ -47,7 +56,7 @@ class Main extends Component {
     const { showModal, showLoading, temperature, icon, summary } = this.state
     return (
       <div>
-        <Map handleMapClick={this.handleMapClick}/>
+        <MapContainer handleMapClick={this.handleMapClick}/>
         <Modal show={showModal} onHide={this.handleCloseModal}>
           <Modal.Header closeButton>
             <Modal.Title>{showLoading ? '' : summary}</Modal.Title>
@@ -73,4 +82,9 @@ class Main extends Component {
   }
 }
 
-export default Main
+
+const mapStateToProps = state => ({
+  coordinates: state.coordinatesReducer.coordinates
+})
+
+export default connect(mapStateToProps, null)(Main);

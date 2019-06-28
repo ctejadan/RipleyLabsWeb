@@ -7,7 +7,6 @@ const retryConfig = {
   retryCondition: () => true,
 }
 
-
 export default class ClientAPI {
 
   getInstance = () => {
@@ -54,5 +53,18 @@ export default class ClientAPI {
 
     })
 
+  }
+
+  getCoordinatesByCity = async (city) => {
+    return new Promise((resolve, reject) => {
+      this.getInstance().request({
+        url: 'coordinates/' + city,
+        method: 'get',
+      }).then(response => {
+        resolve(response.data)
+      }).catch(error =>
+        reject(error.message)
+      )
+    })
   }
 }
