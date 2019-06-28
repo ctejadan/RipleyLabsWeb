@@ -11,7 +11,7 @@ export default class ClientAPI {
 
   getInstance = () => {
     const bffInstance = axios.create({
-      baseURL: 'http://localhost:3000/',
+      baseURL: 'https://ripley-bff.herokuapp.com/',
       timeout: 5000,
     })
     axiosRetry(bffInstance, retryConfig)
