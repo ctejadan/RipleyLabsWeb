@@ -4,7 +4,7 @@ export default class ClientAPI {
 
   getInstance = () => {
     return axios.create({
-      baseURL: process.env === 'production' ? 'https://ripley-bff.herokuapp.com/' : 'http://localhost:3000',
+      baseURL: process.env === 'production' ? 'https://ripley-bff.herokuapp.com/' : 'http://localhost:5000',
       timeout: 5000,
     })
   }
