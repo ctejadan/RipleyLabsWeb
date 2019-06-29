@@ -4,7 +4,7 @@ export default class ClientAPI {
 
   getInstance = () => {
     return axios.create({
-      baseURL: process.env === 'production' ? 'https://ripley-bff.herokuapp.com/' : 'http://localhost:5000',
+      baseURL: 'https://ripley-bff.herokuapp.com/', // 'http://localhost:5000',
       timeout: 5000,
     })
   }
@@ -21,7 +21,9 @@ export default class ClientAPI {
       .catch(error => console.log(error.message))
     } else {
       console.log('random error')
-      setTimeout(()=>{this.handleSimulatedError(lat, lng, resolve)}, 2000);
+      setTimeout(() => {
+        this.handleSimulatedError(lat, lng, resolve)
+      }, 2000);
     }
   }
 
