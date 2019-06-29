@@ -23,7 +23,6 @@ class Main extends Component {
   componentWillReceiveProps = async (nextProps) => {
     const { coordinates } = nextProps
     if (this.props.coordinates !== coordinates) {
-      console.log(coordinates)
       await this.handleMapClick(coordinates.lat, coordinates.lng)
     }
   }
